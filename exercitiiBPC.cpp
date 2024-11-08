@@ -488,7 +488,7 @@ public:
 		scanf_s("%d", &length);
 
 		printf("Read all elements in the vector: \n");
-		int v[100], new_v[100];
+		int v[100];
 		for (int i = 0; i < length; i ++)
 		{
 			scanf_s("%d", &v[i]);
@@ -527,7 +527,7 @@ public:
 		scanf_s("%d", &length);
 
 		printf("Read all elements in the vector: \n");
-		int v[100], new_v[100];
+		int v[100];
 		for (int i = 0; i < length; i++)
 		{
 			scanf_s("%d", &v[i]);
@@ -577,7 +577,7 @@ public:
 		scanf_s("%d", &length);
 
 		printf("Read all elements in the vector: \n");
-		int v[100], new_v[100];
+		int v[100];
 		for (int i = 0; i < length; i++)
 		{
 			scanf_s("%d", &v[i]);
@@ -617,6 +617,46 @@ public:
 			printf("%d ", v[i]);
 		}
 
+	}
+
+
+	void remove_element_in_array_at_pos()
+	{
+		int length, position;
+		printf("Enter the length of the vector: \n");
+		scanf_s("%d", &length);
+
+		printf("Read all elements in the vector: \n");
+		int v[100];
+		for (int i = 0; i < length; i++)
+		{
+			scanf_s("%d", &v[i]);
+		}
+		printf("Read the position from which to remove the number: \n");
+		scanf_s("%d", &position);
+
+		printf("This is the old vector: \n");
+
+		for (int i = 0; i < length; i++)
+		{
+			printf("%d ", v[i]);
+		}
+
+		
+		for (int i = position; i < length; i++) {
+			v[i] = v[i + 1];
+		}
+
+
+		v[length - 1] = 0;
+
+		printf("\nThis is the new vector: \n");
+		for (int i = 0; i < length - 1; i++)
+		{
+			printf("%d ", v[i]);
+		}
+
+
 
 	}
 
@@ -627,7 +667,7 @@ int main ()
 {
 	seminar2 seminar2_obj;
 	seminar3456 seminar3456_obj;
-	seminar3456_obj.insert_zero_after_given_value();
+	seminar3456_obj.remove_element_in_array_at_pos();
 
 	return 0;
 }
