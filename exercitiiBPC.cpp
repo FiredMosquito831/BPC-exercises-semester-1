@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include <set>
 using namespace std;
 
 
@@ -251,58 +251,6 @@ public:
 
 	}
 };
-
-/*
-  Using pseudocode or the corresponding flowchart, write an
- algorithm to read n numbers, print them and then calculate the
- sum of numbers.
-
- • Using pseudocode or the corresponding flowchart, write an
- algorithm to read n numbers, print them and then calculate the
- sum of even numbers.
-
- • Using pseudocode or the corresponding flowchart, write an
- algorithm to read n numbers, print them and then calculate the
- sum of numbers with even index/position
-
- • Using pseudocode or the corresponding flowchart, write an
- algorithm to read n numbers and to find the maximum value.
-
- • Using pseudocode or the corresponding flowchart, write an
- algorithm to read n numbers, to find the maximum value and the
- last position where you find it.
-
- • Using pseudocode or the corresponding flowchart, write an
- algorithm to read n numbers, to find the maximum value and the
- first position where you find it.
-
- • Using pseudocode or the corresponding flowchart, write an
- algorithm to read n numbers, to find all positions of the maximum
- value
-
- • Using pseudocode/flowchart, write an algorithm to read an array
- with n elements and to count the number of occurrences (or
- frequency) of a given value.
-
- • Using pseudocode/flowchart, write an algorithm to read an array
- with n elements and to find the last occurrence of a given value.
-
- • Using pseudocode/flowchart, write an algorithm to read an array
- with n elements and to find the first occurrence of a given value.
-
- • Using pseudocode/flowchart, write an algorithm to read an array
- with n elements and to find the indices of all occurrences of a
- value in an array
-
-
- • Using pseudocode/flowchart, write an algorithm to read n natural
- numbers and to calculate the arithmetic mean.
-
-
-• Using pseudocode/flowchart, write an algorithm to read n natural
- numbers and to calculate the geometric mean
-
-*/
 
 
 class seminar3456
@@ -660,14 +608,186 @@ public:
 
 	}
 
+	void remove_all_even_elements_from_array()
+	{
+		int length, position, elements_removed = 0;
+		printf("Enter the length of the vector: \n");
+		scanf_s("%d", &length);
+
+		printf("Read all elements in the vector: \n");
+		int v[100];
+		for (int i = 0; i < length; i++)
+		{
+			scanf_s("%d", &v[i]);
+		}
+
+		printf("This is the old vector: \n");
+
+		for (int i = 0; i < length; i++)
+		{
+			printf("%d ", v[i]);
+		}
+
+
+		for (int i = 0; i < length - elements_removed; i++) {
+			if (v[i] % 2 == 0) {
+				v[i] = v[i + 1];
+				for (int j = i + 1; j < length - elements_removed; j++)
+				{
+					v[j] = v[j + 1];
+				}
+
+				elements_removed++;
+			}
+		}
+
+		printf("\nThis is the new vector: \n");
+		for (int i = 0; i < length - elements_removed; i++)
+		{
+			printf("%d ", v[i]);
+		}
+
+
+	}
+
+	void remove_all_repeating_elements_from_array()
+	{
+		int length, position, elements_removed = 0;
+		printf("Enter the length of the vector: \n");
+		scanf_s("%d", &length);
+
+		printf("Read all elements in the vector: \n");
+		int v[100];
+		for (int i = 0; i < length; i++)
+		{
+			scanf_s("%d", &v[i]);
+		}
+
+		printf("This is the old vector: \n");
+
+		for (int i = 0; i < length; i++)
+		{
+			printf("%d ", v[i]);
+		}
+
+
+		for (int i = 0; i < length - elements_removed; i++) {
+			for (int k = i + 1; k < length - elements_removed; k++) {
+				if (v[i] == v[k]) {
+					v[k] = v[k + 1];
+					for (int j = k + 1; j < length - elements_removed; j++)
+					{
+						v[j] = v[j + 1];
+					}
+
+					elements_removed++;
+				}
+			}
+		}
+
+		printf("\nThis is the new vector: \n");
+		for (int i = 0; i < length - elements_removed; i++)
+		{
+			printf("%d ", v[i]);
+		}
+
+
+	}
+
+	void  union_of_2_sets()
+	{
+		printf("Input value into the first set, to stop enter 0: \n");
+		int val;
+		scanf_s("%d", &val);
+		set<int> set1 = {};
+		set<int> set2 = {};
+
+		while (val != 0)
+		{
+			set1.insert(val);
+			scanf_s("%d", &val);
+		}
+
+		printf("\nInput value into the second set, to stop enter 0: \n");
+		
+		scanf_s("%d", &val);
+		
+		while (val != 0)
+		{
+			set2.insert(val);
+			scanf_s("%d", &val);
+
+		}
+
+		for (int i : set1)
+		{
+			set2.insert(i);
+		}
+
+		for (int i : set2)
+		{
+			printf("%d ", i);
+		}
+
+
+		
+
+	}
+
+	void intersection_of_2_sets()
+	{
+		printf("Input value into the first set, to stop enter 0: \n");
+		int val;
+		scanf_s("%d", &val);
+		set<int> set1 = {};
+		set<int> set2 = {};
+		set<int> intersected_set = {};
+
+		while (val != 0)
+		{
+			set1.insert(val);
+			scanf_s("%d", &val);
+		}
+
+		printf("\nInput value into the second set, to stop enter 0: \n");
+
+		scanf_s("%d", &val);
+
+		while (val != 0)
+		{
+			set2.insert(val);
+			scanf_s("%d", &val);
+
+		}
+
+		for (int i : set1)
+		{
+			for (int j : set2)
+			{
+				if (i == j)
+				{
+					intersected_set.insert(i);
+				}
+
+			}
+
+		}
+
+		for (int i : intersected_set)
+		{
+			printf("%d ", i);
+		}
+	}
+
 };
 
 
 int main ()
 {
+	seminar1 seminar1_obj;
 	seminar2 seminar2_obj;
 	seminar3456 seminar3456_obj;
-	seminar3456_obj.remove_element_in_array_at_pos();
+	seminar3456_obj.intersection_of_2_sets();
 
 	return 0;
 }
