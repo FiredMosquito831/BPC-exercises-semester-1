@@ -253,7 +253,7 @@ public:
 };
 
 
-class seminar3456
+class seminar345
 {
 public:
 	int binary_search_while() {
@@ -781,13 +781,264 @@ public:
 
 };
 
+class seminar6
+{
+public:
+	void insert_el_at_pos()
+	{
+
+
+		int v[100], n, pos;
+		scanf_s("%d", &n);
+		for (int i = 0; i < n; i ++)
+		{
+			scanf_s("%d", &v[i]);
+		}
+
+		scanf_s("%d", &pos);
+
+		for (int i = n - 1; i >= pos; i --)
+		{
+			v[i + 1] = v[i];
+		}
+
+		scanf_s("%d", &v[pos]);
+
+		for (int i = 0; i <= n; i++)
+		{
+		printf( "%d ", v[i]);
+		}
+	}
+
+
+	void insert_val_after_el()
+	{
+		int v[100], n, element;
+		scanf_s("%d", &n);
+		for (int i = 0; i < n; i++)
+		{
+			scanf_s("%d", &v[i]);
+		}
+
+		scanf_s("%d", &element);
+
+		for (int i = 0;i < n; i ++)
+		{
+			if (v[i] == element)
+			{
+				for (int j = n; j > i + 1; j --)
+				{
+
+					v[j] = v[j - 1];
+				}
+				v[i + 1] = 0;
+					i = n;
+			}
+		}
+
+		for (int i = 0; i <= n; i++)
+		{
+			printf("%d ", v[i]);
+		}
+	}
+
+
+	void insert_val_before_elem()
+	{
+		int v[100], n, element;
+		scanf_s("%d", &n);
+		for (int i = 0; i < n; i++)
+		{
+			scanf_s("%d", &v[i]);
+		}
+
+		scanf_s("%d", &element);
+
+		for (int i = 0; i < n; i ++)
+		{
+			if (v[i] == element)
+			{
+				for (int j = n - 1; j >= i; j --)
+				{
+					v[j + 1] = v[j];
+				}
+				v[i] = 0;
+				i = n;
+			}
+		}
+
+		for (int i = 0; i <= n; i++)
+		{
+			printf("%d ", v[i]);
+		}
+	}
+
+	void remove_element_from_pos ()
+	{
+		int v[100], n, pos;
+		scanf_s("%d", &n);
+		for (int i = 0; i < n; i++)
+		{
+			scanf_s("%d", &v[i]);
+		}
+
+		scanf_s("%d", &pos);
+
+		for (int i = pos; i < n - 1; i ++)
+		{
+			v[i] = v[i + 1];
+
+		}
+
+		for (int i = 0; i < n - 1; i++)
+		{
+			printf("%d ", v[i]);
+		}
+	}
+
+	void remove_even_numbers()
+	{
+		int v[100], n, numbers_rem = 0;
+		scanf_s("%d", &n);
+		for (int i = 0; i < n; i++)
+		{
+			scanf_s("%d", &v[i]);
+		}
+
+		for (int i = 0; i < n - numbers_rem; i ++)
+		{
+			if (v[i] % 2 == 0)
+			{
+				for (int j = i; j < n - numbers_rem; j ++)
+				{
+					v[j] = v[j + 1];
+				}
+				numbers_rem++;
+				i--;
+			}
+		}
+
+		for (int i = 0; i < n - numbers_rem; i++)
+		{
+			printf("%d ", v[i]);
+		}
+	}
+
+
+	void remove_duplicates()
+	{
+		int v[100], n, numbers_rem = 0;
+		scanf_s("%d", &n);
+		for (int i = 0; i < n; i++)
+		{
+			scanf_s("%d", &v[i]);
+		}
+
+		for (int i = 0; i < n - numbers_rem; i++)
+		{
+			for (int k = i + 1; k < n - numbers_rem; k++) {
+				if (v[i] == v[k])
+				{
+					for (int j = k; j < n - numbers_rem; j++)
+					{
+						v[j] = v[j + 1];
+					}
+					numbers_rem++;
+					k--;
+				}
+			}
+		}
+
+		for (int i = 0; i < n - numbers_rem; i++)
+		{
+			printf("%d ", v[i]);
+		}
+	}
+
+	void union_of_arrays()
+	{
+		int len1, v1[100], len2, v2[100];
+		scanf_s("%d", &len1);
+
+		for (int i = 0; i < len1; i ++)
+		{
+			scanf_s("%d", &v1[i]);
+
+		}
+
+		scanf_s("%d", &len2);
+
+		for (int i = 0; i < len2; i++)
+		{
+			scanf_s("%d", &v2[i]);
+		}
+
+		int len3 = len1 + len2, v3[200];
+
+		for (int i = 0; i < len1; i ++) {
+			v3[i] = v1[i];
+		}
+
+		for (int i = len1; i < len1 + len2; i ++)
+		{
+			v3[i] = v2[i - len1];
+		}
+
+		for (int i = 0; i < len1 + len2; i++)
+		{
+			printf("%d ", v3[i]);
+		}
+	}
+
+	void intersection_of_arrays()
+	{
+		int len1, v1[100], len2, v2[100];
+		scanf_s("%d", &len1);
+
+		for (int i = 0; i < len1; i++)
+		{
+			scanf_s("%d", &v1[i]);
+
+		}
+
+		scanf_s("%d", &len2);
+
+		for (int i = 0; i < len2; i++)
+		{
+			scanf_s("%d", &v2[i]);
+		}
+
+		int len3 = 0;
+		int v3[100];
+
+		for (int i = 0; i < len1; i ++)
+		{
+			for (int j = 0; j < len2; j ++)
+			{
+				if (v2[j] == v1[i])
+				{
+					v3[len3] = v1[i];
+					len3++;
+					j = len2;
+				}
+			}
+		}
+
+		for (int i = 0; i < len3; i ++)
+		{
+			printf("%d ", v3[i]);
+		}
+	}
+};
+
 
 int main ()
 {
 	seminar1 seminar1_obj;
 	seminar2 seminar2_obj;
-	seminar3456 seminar3456_obj;
-	seminar3456_obj.intersection_of_2_sets();
+	seminar345 seminar345_obj;
+	seminar6 seminar6_obj;
+	seminar6_obj.intersection_of_arrays();
 
 	return 0;
 }
