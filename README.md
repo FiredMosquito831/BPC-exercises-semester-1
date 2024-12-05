@@ -1045,6 +1045,141 @@ public:
 };
 
 
+
+class seminar10
+{
+public:
+	void noPointersInterchange(int a, int b)
+	{
+		int temp = a;
+		a = b;
+		b = temp;
+
+	}
+
+	void PointerInterchange(int *a, int *b)
+	{
+		int temp = *a;
+		*a = *b;
+		*b = temp;
+	}
+
+	
+
+
+	void readMatrix(int student_grades[10][10], int* rows, int* col)
+	{
+		scanf_s("%d", &*rows);
+		scanf_s("%d", &*col);
+
+		for (int i = 0; i < *rows; i++)
+		{
+			for (int j = 0; j < *col; j++)
+			{
+				scanf_s("%d", &student_grades[i][j]);
+			}
+		}
+
+
+	}
+
+	void printMatrix(int student_grades[10][10], int rows, int col)
+	{
+		for (int i = 0; i < rows; i++)
+		{
+			for (int j = 0; j < col; j++)
+			{
+				printf("%d ", student_grades[i][j]);
+			}
+			printf("\n");
+		}
+
+	}
+
+	void printArray(int array[10], int dim)
+	{
+		for (int i = 0; i < dim; i++)
+		{
+			printf("%d ", array[i]);
+		}
+	}
+
+	void ascending_order_grades(int student_grades[10][10], int rows, int col, int ascending_order_stud[10], int* k)
+	{
+		*k = 0;
+		int ascending = true;
+		for (int i = 0; i < rows - 1; i++)
+		{
+			ascending = true;
+			for (int j = 0; j < col - 1 && ascending == true; j++)
+			{
+				if (student_grades[i][j] > student_grades[i][j + 1])
+				{
+					ascending = false;
+				}
+			}
+
+			if (ascending == true)
+			{
+				//printf("Student number %d has ascending grades\n", i + 1);
+				ascending_order_stud[*k] = i + 1; // we do i + 1 to show the line counting from 1 instead of 0
+				(*k)++;
+			}
+		}
+	}
+
+	void min_grade_discipline(int student_grades[10][10], int rows, int col, int min_grade[10])
+	{
+
+		// int min_grade;
+		int j = 0;
+		for (int i = 0; i < col; i++)
+		{
+			j = 0;
+			min_grade[i] = student_grades[0][i];
+
+			for (j = 0; j < rows; j++)
+			{
+				if (student_grades[j][i] < min_grade[i])
+				{
+					min_grade[i] = student_grades[j][i];
+				}
+
+			}
+
+			// printf("The min grade for discipline %d");
+		}
+
+
+
+	}
+
+
+	int main()
+	{
+
+		int student_grades[10][10];
+		int student_ascending_grades[10];
+		int temp_array[10];
+		int rows = 0, col = 0, dim_asc = 0;;
+		readMatrix(student_grades, &rows, &col);
+		printf("\n");
+		printMatrix(student_grades, rows, col);
+		ascending_order_grades(student_grades, rows, col, student_ascending_grades, &dim_asc);
+		printf("\n");
+		printf("The students with ascending grades are:\n");
+		printArray(student_ascending_grades, dim_asc);
+		min_grade_discipline(student_grades, rows, col, temp_array);
+		printf("\n");
+		printf("The minimum grade of each discipline is: \n");
+		printArray(temp_array, col);
+
+		return 0;
+	}
+
+};
+
+
 int main ()
 {
 	seminar1 seminar1_obj;
