@@ -1179,6 +1179,126 @@ public:
 
 };
 
+class seminar11 {
+public:
+
+	void readMatrix(int matrix[100][100], int *n)
+	{
+		//scanf_s("%d", &*rows);
+		//scanf_s("%d", &*col);
+		scanf_s("%d", &*n);
+		for (int i = 0; i < *n; i++)
+		{
+			for (int j = 0; j < *n; j++)
+			{
+				scanf_s("%d", &matrix[i][j]);
+			}
+		}
+
+
+	}
+
+	void readArray(int arrays[100], int dim)
+	{
+		for (int i = 0; i < dim; i++)
+		{
+			scanf_s("%d ", &arrays[i]);
+		}
+	}
+	void printMatrix(int student_grades[100][100], int rows, int col)
+	{
+		for (int i = 0; i < rows; i++)
+		{
+			for (int j = 0; j < col; j++)
+			{
+				printf("%d ", student_grades[i][j]);
+			}
+			printf("\n");
+		}
+
+	}
+
+	void printArray(int array[10], int dim)
+	{
+		for (int i = 0; i < dim; i++)
+		{
+			printf("%d ", array[i]);
+		}
+	}
+
+	int check_symmetry(int matrix[100][100], int n) {
+		
+		bool check_sym = true;
+		for (int i = 0; i < n && check_sym == true; i++) {
+			for (int j = 0; j < n && check_sym == true; j++) {
+				if (matrix[i][j] != matrix[j][i]) { // || matrix[i][j] != matrix[i][cols - i - 1]) {
+					check_sym = false;
+				}
+			}
+		}
+	
+		if (check_sym == true) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
+	}
+
+	int scalar_product_diagonals(int matrix[100][100], int n) {
+		int product = 0;
+		for (int i = 0; i < n; i++) {
+				product += matrix[i][i] * matrix[i][n - i - 1];  // || diag 1 -> matrix[i][j]  diag 2 -> matrix[i][cols - i - 1]) {
+		}
+		return product;
+		}
+
+	int vector_product_of_diagonals(int matrix[100][100], int n, int res[100]) {
+		//int product = 0;
+		//int s_diag1 = 0;
+		//int s_diag2 = 0;
+		for (int i = 0; i < n; i++) {
+			// s_diag1 += matrix[i][i];
+			// s_diag2 += matrix[i][n - i - 1];
+			res[i] = matrix[i][i] * matrix[i][n - i - 1];
+		}
+		// product = s_diag1 * s_diag2;
+		printf("\nThe resulting matrix of vector product of diagonals is: \n");
+		printArray(res, n);
+		return 0;
+	}
+
+	float calculate_average_of_elements_above_main_diag(int matrix[100][100], int n) {
+		int increment = 0;
+		int average = 0;
+		float average_fl = 0.0f;
+		for (int i = 0; i < n - 1; i++) {
+			average += matrix[i][i + 1];
+			increment++;
+		}
+
+		average_fl = (float)average / increment;
+		//printf("\n\n\n%d", average);
+		return average_fl;
+	}
+
+
+	int maina() {
+		int n;
+		int matrix[100][100];
+		// int rows, cols;
+		readMatrix(matrix, &n);
+		int results[100];
+		
+		printf("\nThe matrix is symmetric? %d", check_symmetry(matrix, n));
+		printf("\nThe scakar product is: %d", scalar_product_diagonals(matrix, n));
+		vector_product_of_diagonals(matrix, n, results);
+		printf("\n The average of the elements above the main diag is: %5.2f", calculate_average_of_elements_above_main_diag(matrix, n));
+
+		return 0;
+	}
+};
+
 
 int main ()
 {
