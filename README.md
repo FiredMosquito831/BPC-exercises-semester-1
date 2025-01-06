@@ -1299,6 +1299,95 @@ public:
 	}
 };
 
+class seminar12 {
+
+
+public:
+				// 2 pointers, 1 for the dynamic mem allocation and 1 for pointing to its addresses
+	void read_arr(int** v, int* n) {
+		printf("Array length is: ");
+		scanf_s("%d", &*n);
+		(*v) = (int*)malloc((*n) * sizeof(int));
+						// length 6			//4 bytes => 24 bytes
+		for (int i = 0; i < *n; i++) {
+			scanf_s("%d", &(*v)[i]);
+		}
+	}
+
+	void print_arr(int *v, int n) {
+		printf("Array is:\n ");
+		
+		
+		// length 6			//4 bytes => 24 bytes
+		for (int i = 0; i < n; i++) {
+			printf("%d ", v[i]);
+		}
+	}
+
+	void elem_less_than_10(int *v, int n, int** elem_less, int *len) {
+		int dif = 0;
+		*len = 0;
+		for (int i = 0; i < n; i++) {
+			if (v[i] < 10) {
+				(*len)++;    
+			}
+		}
+		(*elem_less) = (int*)malloc((*len) * sizeof(int));
+		for (int i = 0; i < n; i++) {
+			if (v[i] < 10) {
+				(*elem_less)[dif] = v[i];
+				dif++;
+			}
+		}
+	
+	}
+
+
+	void read_matrix(int*** matrix, int* col, int* row) {
+		scanf_s("%d", &*col);
+		scanf_s("%d", &*row);
+
+		(*matrix) = (int**)malloc((*row) * sizeof(int*));
+
+		// Allocate memory for columns in each row
+		for (int i = 0; i < *row; i++) {
+			(*matrix)[i] = (int*)malloc(*col * sizeof(int));
+		}
+
+		for (int i = 0; i < *col; i++) {
+			for (int j = 0; j < *row; j++) {
+				scanf_s("%d", &(*matrix)[i][j]);
+			}
+		}
+	}
+
+	void print_matrix(int** matrix, int col, int row) {
+
+		for (int i = 0; i < col; i++) {
+			for (int j = 0; j < row; j++) {
+				printf("%d ", (matrix)[i][j]);
+			}
+			printf("\n");
+		}
+	}
+	int maina() {
+
+		int* v;
+		int n;
+		int* elem_less_than;
+		int len2;
+		int** matrix;
+		int col, row;
+
+		//read_arr(&v, &n);
+		// print_arr(v, n);
+		//elem_less_than_10(v, n,&elem_less_than, &len2);
+		//print_arr(elem_less_than, len2);
+		read_matrix(&matrix, &col, &row);
+		print_matrix(matrix, col, row);
+		return 0;
+	}
+};
 
 int main ()
 {
