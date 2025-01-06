@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <set>
+#include <malloc.h>
 using namespace std;
 
 
@@ -955,12 +956,12 @@ public:
 		}
 	}
 
-	void union_of_arrays()
+	void union_of_arrays_OLD_wrong()
 	{
 		int len1, v1[100], len2, v2[100];
 		scanf_s("%d", &len1);
 
-		for (int i = 0; i < len1; i ++)
+		for (int i = 0; i < len1; i++)
 		{
 			scanf_s("%d", &v1[i]);
 
@@ -975,11 +976,11 @@ public:
 
 		int len3 = len1 + len2, v3[200];
 
-		for (int i = 0; i < len1; i ++) {
+		for (int i = 0; i < len1; i++) {
 			v3[i] = v1[i];
 		}
 
-		for (int i = len1; i < len1 + len2; i ++)
+		for (int i = len1; i < len1 + len2; i++)
 		{
 			v3[i] = v2[i - len1];
 		}
@@ -988,6 +989,69 @@ public:
 		{
 			printf("%d ", v3[i]);
 		}
+	}
+
+	void union_of_arrays_no_rep()
+	{
+		int len1, v1[100], len2, v2[100];
+		scanf_s("%d", &len1); // read the number of elements for array1
+
+		for (int i = 0; i < len1; i++)
+		{
+			scanf_s("%d", &v1[i]); 
+		}
+
+		for (int i = 0; i < len1; i++)
+		{
+			printf("%d ", v1[i]);
+		}
+		printf("\n");
+		scanf_s("%d", &len2);
+
+		for (int i = 0; i < len2; i++)
+		{
+			scanf_s("%d", &v2[i]);
+		}
+
+
+		for (int i = 0; i < len2; i++)
+		{
+			printf("%d ", v2[i]);
+		}
+		printf("\n");
+
+		int len3 = 0;  // default length is as it will increase with each inserted element and will also represent position of insertion
+		int v3[200]; 
+		for (int i = 0; i < len1; i++)
+		{
+			v3[len3] = v1[i];
+			len3++;
+		}
+		for (int i = 0; i < len2; i++)
+		{
+			bool isPresent = false;
+			for (int j = 0; j < len1; j++) // comparing elements from v2 with the elements present in v3 to see if they exist within v3 or not 
+			{
+				if (v2[i] == v3[j])
+				{
+					isPresent = true;
+					j = len3;
+				}
+			}
+			if (!isPresent)
+			{
+				v3[len3] = v2[i];
+				len3++;
+			}
+
+		}
+		 // printing the united vector
+		for (int i = 0; i < len3; i++)
+		{
+			printf("%d ", v3[i]);
+		}
+
+
 	}
 
 	void intersection_of_arrays()
@@ -1020,6 +1084,7 @@ public:
 					v3[len3] = v1[i];
 					len3++;
 					j = len2;
+					
 				}
 			}
 		}
@@ -1029,16 +1094,355 @@ public:
 			printf("%d ", v3[i]);
 		}
 	}
+
 };
 
 
-int main ()
+class seminar10
 {
-	seminar1 seminar1_obj;
-	seminar2 seminar2_obj;
-	seminar345 seminar345_obj;
-	seminar6 seminar6_obj;
-	seminar6_obj.intersection_of_arrays();
+public:
+	void noPointersInterchange(int a, int b)
+	{
+		int temp = a;
+		a = b;
+		b = temp;
 
-	return 0;
+	}
+
+	void PointerInterchange(int *a, int *b)
+	{
+		int temp = *a;
+		*a = *b;
+		*b = temp;
+	}
+
+	
+
+
+	void readMatrix(int student_grades[10][10], int* rows, int* col)
+	{
+		scanf_s("%d", &*rows);
+		scanf_s("%d", &*col);
+
+		for (int i = 0; i < *rows; i++)
+		{
+			for (int j = 0; j < *col; j++)
+			{
+				scanf_s("%d", &student_grades[i][j]);
+			}
+		}
+
+
+	}
+
+	void printMatrix(int student_grades[10][10], int rows, int col)
+	{
+		for (int i = 0; i < rows; i++)
+		{
+			for (int j = 0; j < col; j++)
+			{
+				printf("%d ", student_grades[i][j]);
+			}
+			printf("\n");
+		}
+
+	}
+
+	void printArray(int array[10], int dim)
+	{
+		for (int i = 0; i < dim; i++)
+		{
+			printf("%d ", array[i]);
+		}
+	}
+
+	void ascending_order_grades(int student_grades[10][10], int rows, int col, int ascending_order_stud[10], int* k)
+	{
+		*k = 0;
+		int ascending = true;
+		for (int i = 0; i < rows - 1; i++)
+		{
+			ascending = true;
+			for (int j = 0; j < col - 1 && ascending == true; j++)
+			{
+				if (student_grades[i][j] > student_grades[i][j + 1])
+				{
+					ascending = false;
+				}
+			}
+
+			if (ascending == true)
+			{
+				//printf("Student number %d has ascending grades\n", i + 1);
+				ascending_order_stud[*k] = i + 1; // we do i + 1 to show the line counting from 1 instead of 0
+				(*k)++;
+			}
+		}
+	}
+
+	void min_grade_discipline(int student_grades[10][10], int rows, int col, int min_grade[10])
+	{
+
+		// int min_grade;
+		int j = 0;
+		for (int i = 0; i < col; i++)
+		{
+			j = 0;
+			min_grade[i] = student_grades[0][i];
+
+			for (j = 0; j < rows; j++)
+			{
+				if (student_grades[j][i] < min_grade[i])
+				{
+					min_grade[i] = student_grades[j][i];
+				}
+
+			}
+
+			// printf("The min grade for discipline %d");
+		}
+
+
+
+	}
+
+
+	int main()
+	{
+
+		int student_grades[10][10];
+		int student_ascending_grades[10];
+		int temp_array[10];
+		int rows = 0, col = 0, dim_asc = 0;;
+		readMatrix(student_grades, &rows, &col);
+		printf("\n");
+		printMatrix(student_grades, rows, col);
+		ascending_order_grades(student_grades, rows, col, student_ascending_grades, &dim_asc);
+		printf("\n");
+		printf("The students with ascending grades are:\n");
+		printArray(student_ascending_grades, dim_asc);
+		min_grade_discipline(student_grades, rows, col, temp_array);
+		printf("\n");
+		printf("The minimum grade of each discipline is: \n");
+		printArray(temp_array, col);
+
+		return 0;
+	}
+
+};
+
+
+class seminar11 {
+public:
+
+	void readMatrix(int matrix[100][100], int *n)
+	{
+		//scanf_s("%d", &*rows);
+		//scanf_s("%d", &*col);
+		scanf_s("%d", &*n);
+		for (int i = 0; i < *n; i++)
+		{
+			for (int j = 0; j < *n; j++)
+			{
+				scanf_s("%d", &matrix[i][j]);
+			}
+		}
+
+
+	}
+
+	void readArray(int arrays[100], int dim)
+	{
+		for (int i = 0; i < dim; i++)
+		{
+			scanf_s("%d ", &arrays[i]);
+		}
+	}
+	void printMatrix(int student_grades[100][100], int rows, int col)
+	{
+		for (int i = 0; i < rows; i++)
+		{
+			for (int j = 0; j < col; j++)
+			{
+				printf("%d ", student_grades[i][j]);
+			}
+			printf("\n");
+		}
+
+	}
+
+	void printArray(int array[10], int dim)
+	{
+		for (int i = 0; i < dim; i++)
+		{
+			printf("%d ", array[i]);
+		}
+	}
+
+	int check_symmetry(int matrix[100][100], int n) {
+		
+		bool check_sym = true;
+		for (int i = 0; i < n && check_sym == true; i++) {
+			for (int j = 0; j < n && check_sym == true; j++) {
+				if (matrix[i][j] != matrix[j][i]) { // || matrix[i][j] != matrix[i][cols - i - 1]) {
+					check_sym = false;
+				}
+			}
+		}
+	
+		if (check_sym == true) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
+	}
+
+	int scalar_product_diagonals(int matrix[100][100], int n) {
+		int product = 0;
+		for (int i = 0; i < n; i++) {
+				product += matrix[i][i] * matrix[i][n - i - 1];  // || diag 1 -> matrix[i][j]  diag 2 -> matrix[i][cols - i - 1]) {
+		}
+		return product;
+		}
+
+	int vector_product_of_diagonals(int matrix[100][100], int n, int res[100]) {
+		//int product = 0;
+		//int s_diag1 = 0;
+		//int s_diag2 = 0;
+		for (int i = 0; i < n; i++) {
+			// s_diag1 += matrix[i][i];
+			// s_diag2 += matrix[i][n - i - 1];
+			res[i] = matrix[i][i] * matrix[i][n - i - 1];
+		}
+		// product = s_diag1 * s_diag2;
+		printf("\nThe resulting matrix of vector product of diagonals is: \n");
+		printArray(res, n);
+		return 0;
+	}
+
+	float calculate_average_of_elements_above_main_diag(int matrix[100][100], int n) {
+		int increment = 0;
+		int average = 0;
+		float average_fl = 0.0f;
+		for (int i = 0; i < n - 1; i++) {
+			average += matrix[i][i + 1];
+			increment++;
+		}
+
+		average_fl = (float)average / increment;
+		//printf("\n\n\n%d", average);
+		return average_fl;
+	}
+
+
+	int maina() {
+		int n;
+		int matrix[100][100];
+		// int rows, cols;
+		readMatrix(matrix, &n);
+		int results[100];
+		
+		printf("\nThe matrix is symmetric? %d", check_symmetry(matrix, n));
+		printf("\nThe scakar product is: %d", scalar_product_diagonals(matrix, n));
+		vector_product_of_diagonals(matrix, n, results);
+		printf("\n The average of the elements above the main diag is: %5.2f", calculate_average_of_elements_above_main_diag(matrix, n));
+
+		return 0;
+	}
+};
+class seminar12 {
+
+
+public:
+				// 2 pointers, 1 for the dynamic mem allocation and 1 for pointing to its addresses
+	void read_arr(int** v, int* n) {
+		printf("Array length is: ");
+		scanf_s("%d", &*n);
+		(*v) = (int*)malloc((*n) * sizeof(int));
+						// length 6			//4 bytes => 24 bytes
+		for (int i = 0; i < *n; i++) {
+			scanf_s("%d", &(*v)[i]);
+		}
+	}
+
+	void print_arr(int *v, int n) {
+		printf("Array is:\n ");
+		
+		
+		// length 6			//4 bytes => 24 bytes
+		for (int i = 0; i < n; i++) {
+			printf("%d ", v[i]);
+		}
+	}
+
+	void elem_less_than_10(int *v, int n, int** elem_less, int *len) {
+		int dif = 0;
+		*len = 0;
+		for (int i = 0; i < n; i++) {
+			if (v[i] < 10) {
+				(*len)++;    
+			}
+		}
+		(*elem_less) = (int*)malloc((*len) * sizeof(int));
+		for (int i = 0; i < n; i++) {
+			if (v[i] < 10) {
+				(*elem_less)[dif] = v[i];
+				dif++;
+			}
+		}
+	
+	}
+
+
+	void read_matrix(int*** matrix, int* col, int* row) {
+		scanf_s("%d", &*col);
+		scanf_s("%d", &*row);
+
+		(*matrix) = (int**)malloc((*row) * sizeof(int*));
+
+		// Allocate memory for columns in each row
+		for (int i = 0; i < *row; i++) {
+			(*matrix)[i] = (int*)malloc(*col * sizeof(int));
+		}
+
+		for (int i = 0; i < *col; i++) {
+			for (int j = 0; j < *row; j++) {
+				scanf_s("%d", &(*matrix)[i][j]);
+			}
+		}
+	}
+
+	void print_matrix(int** matrix, int col, int row) {
+
+		for (int i = 0; i < col; i++) {
+			for (int j = 0; j < row; j++) {
+				printf("%d ", (matrix)[i][j]);
+			}
+			printf("\n");
+		}
+	}
+	int maina() {
+
+		int* v;
+		int n;
+		int* elem_less_than;
+		int len2;
+		int** matrix;
+		int col, row;
+
+		//read_arr(&v, &n);
+		// print_arr(v, n);
+		//elem_less_than_10(v, n,&elem_less_than, &len2);
+		//print_arr(elem_less_than, len2);
+		read_matrix(&matrix, &col, &row);
+		print_matrix(matrix, col, row);
+		return 0;
+	}
+};
+
+int main()
+{
+	seminar12 seminar12_obj;
+	seminar12_obj.maina();
 }
